@@ -51,4 +51,13 @@ public class PessoaController {
         objView.addObject("pessoaobj", pessoa.get());
         return objView;
     }
+
+    @RequestMapping(method = RequestMethod.GET, value = "/excluir-pessoa/{idpessoa}")
+    public ModelAndView excluirPessoa(@PathVariable("idpessoa") Long idpessoa){
+        pessoaDao.deleteById(idpessoa);
+        ModelAndView objView = new ModelAndView("cadastro/cadastro-pessoa");
+        objView.addObject("pessoas", pessoaDao.findAll());
+        objView.addObject("pessoaobj", new Pessoa());
+        return objView;
+    }
 }
